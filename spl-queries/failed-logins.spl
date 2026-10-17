@@ -1,0 +1,4 @@
+source="auth_logs.csv" event="failed"
+| stats count by username src_ip
+| where count >= 5
+

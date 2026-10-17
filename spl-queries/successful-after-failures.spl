@@ -1,0 +1,5 @@
+source="auth_logs.csv"
+| sort 0 _time
+| streamstats count(eval(event="failed")) as failures by username src_ip
+| where event="success" AND failures >= 5
+| table _time username src_ip event failures host
